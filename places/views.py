@@ -1,3 +1,66 @@
+import json
 from django.shortcuts import render
+from .models import Place
 
-# Create your views here.
+
+# def compile_geojson_from_place(place) -> dict:
+#     return {
+#         "type": "Feature",
+#         "geometry": {"type": "Point", "coordinates": [place.lng, place.lat]},
+#         "properties": {
+#             "title": place.title,
+#             "placeId": place.id,
+#             "detailsUrl": {"data": json.dumps({
+#                 "title": place.title,
+#                 "imgs": [img.image.url for img in place.images.all()],
+#                 "description_short": place.description_short,
+#                 "description_long": place.description_long,
+#                 "coordinates": {"lng": str(place.lng), "lat": str(place.lat)},
+#             })},
+#         },
+#     }
+
+
+
+
+def show_index(request):
+    # template = loader.get_template()
+    # geojson = {
+    #     "type": "FeatureCollection",
+    #     "features": [
+    #         compile_geojson_from_place(place)
+    #         for place in Place.objects.prefetch_related("images").all()
+    #     ],
+    # }
+
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [37.62, 55.793676]
+                },
+                "properties": {
+                    "title": "«Легенды Москвы",
+                    "placeId": "moscow_legends",
+                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
+                },
+            },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [37.64, 55.753676]
+                    },
+                    "properties": {
+                        "title": "Крыши24.рф",
+                        "placeId": "roofs24",
+                            "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/roofs24.json"
+                    }
+                }
+        ]
+    }
+
+    return render(request, "index.html", context={"geojson": geojson})
