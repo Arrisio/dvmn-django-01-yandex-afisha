@@ -21,8 +21,6 @@ from .models import Place
 #     }
 
 
-
-
 def show_index(request):
     # template = loader.get_template()
     # geojson = {
@@ -38,29 +36,15 @@ def show_index(request):
         "features": [
             {
                 "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.62, 55.793676]
-                },
+                "geometry": {"type": "Point", "coordinates": [place.lng, place.lat]},
                 "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
+                    "title": place.title,
+                    "placeId": place.id,
+                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json",
                 },
-            },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [37.64, 55.753676]
-                    },
-                    "properties": {
-                        "title": "Крыши24.рф",
-                        "placeId": "roofs24",
-                            "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/roofs24.json"
-                    }
-                }
-        ]
+            }
+            for place in Place.objects.prefetch_related("images").all()
+        ],
     }
 
     return render(request, "index.html", context={"geojson": geojson})
