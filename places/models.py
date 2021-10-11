@@ -12,3 +12,17 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название")
+    place = models.ForeignKey(
+        Place, related_name="images", verbose_name="Место", on_delete=models.CASCADE
+    )
+    image = models.ImageField(verbose_name="Картинка")
+    position = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = [
+            "position",
+        ]
