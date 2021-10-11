@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from yandex_afisha import settings
 
 
 class Place(models.Model):
@@ -21,6 +22,9 @@ class Image(models.Model):
     )
     image = models.ImageField(verbose_name="Картинка")
     position = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name} ({self.place})"
 
     class Meta:
         ordering = [
