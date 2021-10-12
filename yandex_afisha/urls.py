@@ -24,6 +24,7 @@ from places import views
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
+        path("places/<int:place_id>/", views.get_place_by_id),
         path("", views.show_index),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
