@@ -21,7 +21,7 @@ class Image(models.Model):
         Place, related_name="images", verbose_name="Место", on_delete=models.CASCADE
     )
     image = models.ImageField(verbose_name="Картинка")
-    position = models.IntegerField(default=0)
+    position = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.name} ({self.place})"

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "adminsortable2",
     "places",
 ]
 
@@ -126,7 +127,7 @@ STATICFILES_DIRS = [
     BASE_DIR / STATIC_URL,
 ]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / MEDIA_URL
 print(MEDIA_ROOT)
 
