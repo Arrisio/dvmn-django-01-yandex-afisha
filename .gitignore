@@ -698,5 +698,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-.media
-.db.sqlite3
+db.sqlite3
+/media/*
