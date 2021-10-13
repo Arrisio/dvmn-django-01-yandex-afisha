@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 from environs import Env
+import dj_database_url
 
 env = Env()
 env.read_env()
@@ -92,6 +93,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
