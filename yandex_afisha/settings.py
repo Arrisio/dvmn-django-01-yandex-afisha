@@ -135,13 +135,18 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / STATIC_URL,
-]
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / STATIC_URL,
+    ]
+
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / MEDIA_URL
-print(MEDIA_ROOT)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
