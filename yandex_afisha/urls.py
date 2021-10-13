@@ -28,6 +28,6 @@ urlpatterns = (
         path("", views.show_index),
         path('tinymce/', include('tinymce.urls')),
     ]
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + static(settings.STATIC_URL)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
