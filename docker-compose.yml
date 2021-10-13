@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  dvmn-django1-yandex:
+    restart: unless-stopped
+    build:
+      context: .
+    container_name: dvmn-django1-yandex
+    ports:
+      - "8000:8000"
+    networks:
+      - shared-net
+#    volumes:
+#      - ./bot:/app
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.dvmn-django01.loadbalancer.server.port=8000
+
+      - traefik.http.routers.dvmn-django01-https.service=dvmn-django01
+      - traefik.http.routers.dvmn-django01-https.rule=Host(`dvmn.2qwerty.com`)
+      - traefik.http.routers.dvmn-django01-https.entrypoints=web-secure
+      - traefik.http.routers.dvmn-django01-https.tls=true
+      - traefik.http.routers.dvmn-django01-https.tls.certresolver=myresolver
+
+      - traefik.http.routers.dvmn-django01.service=dvmn-django01
+      - traefik.http.routers.dvmn-django01.rule=Host(`dvmn.2qwerty.com`)
+      - traefik.http.routers.dvmn-django01.entrypoints=web
+      - traefik.http.routers.dvmn-django01.middlewares=dvmn-django01-redirectscheme
+      - traefik.http.middlewares.dvmn-django01-redirectscheme.redirectscheme.scheme=https
+      - traefik.http.middlewares.dvmn-django01-redirectscheme.redirectscheme.permanent=true
+    env_file:
+      - .env
+    command: ["python", "manage.py", "runserver"]
+
+networks:
+  shared-net:
+    external:
+      name: shared-net
