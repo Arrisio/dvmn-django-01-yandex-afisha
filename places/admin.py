@@ -23,6 +23,10 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
+    ordering = ["title"]
+    search_fields = ["title"]
 
 
-admin.site.register(Image)
+@admin.register(Image)
+class imageAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["place"]
