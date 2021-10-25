@@ -142,6 +142,8 @@ if DEBUG:
 else:
     # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     pass
+
+
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / MEDIA_URL
 
