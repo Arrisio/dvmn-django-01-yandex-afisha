@@ -26,7 +26,7 @@ urlpatterns = (
         path("admin/", admin.site.urls),
         path("places/<int:place_id>/", views.get_place_by_id),
         path("", views.show_index),
-        path('tinymce/', include('tinymce.urls')),
+        path("tinymce/", include("tinymce.urls")),
     ]
     + static(settings.STATIC_URL)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
