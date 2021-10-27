@@ -28,5 +28,5 @@ class PlaceAdmin(admin.ModelAdmin):
 
 
 @admin.register(Image)
-class imageAdmin(admin.ModelAdmin):
+class ImageAdmin(admin.ModelAdmin):
     autocomplete_fields = ["place"]
